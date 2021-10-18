@@ -1,0 +1,31 @@
+<script>
+
+cruiser_text = {
+  roll_failed: "The cruiser remains locked.",
+  roll_succeeded: "The cruiser has been unlocked!"
+}
+
+cruiser_percentages = {
+  1: 0.15,
+  2: 0.5,
+  3: 1
+}
+
+round = 1
+
+
+function start_round() {
+  if ( Math.random() < cruiser_percentages[round] ) {
+    document.getElementById("output").innerText = cruiser_text["roll_succeeded"]
+  } else {
+    document.getElementById("output").innerText = cruiser_text["roll_failed"]
+  }
+}
+
+</script>
+
+
+
+<button onclick="start_round()">Simulate starting round 1</button>
+
+<p id="output">Text goes here</p>
