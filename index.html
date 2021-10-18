@@ -11,11 +11,14 @@ cruiser_percentages = {
   3: 1
 }
 
-round = 1
+round_number = 0
 
 
 function start_round() {
-  if ( Math.random() < cruiser_percentages[round] ) {
+  round_number = round_number + 1
+  document.getElementById("round").innerText = "Round " + round_number
+  
+  if ( Math.random() < cruiser_percentages[round_number] ) {
     document.getElementById("output").innerText = cruiser_text["roll_succeeded"]
   } else {
     document.getElementById("output").innerText = cruiser_text["roll_failed"]
@@ -26,6 +29,8 @@ function start_round() {
 
 
 
-<button onclick="start_round()">Simulate starting round 1</button>
+<button onclick="start_round()">Click to start new round</button>
 
-<p id="output">Text goes here</p>
+<h1 id="round">The game has not yet begun.</h1>
+
+<p id="output">Updates will appear here.</p>
