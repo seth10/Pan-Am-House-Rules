@@ -2,7 +2,7 @@
 
 cruiser_text = {
   roll_failed: "The cruiser remains locked.",
-  roll_succeeded: "The cruiser has been unlocked!"
+  roll_succeeded: "The cruiser is unlocked!"
 }
 
 cruiser_percentages = {
@@ -11,6 +11,8 @@ cruiser_percentages = {
   3: 1
 }
 
+cruiser_unlocked = false
+
 round_number = 0
 
 
@@ -18,10 +20,13 @@ function start_round() {
   round_number = round_number + 1
   document.getElementById("round").innerText = "Round " + round_number
   
-  if ( Math.random() < cruiser_percentages[round_number] ) {
-    document.getElementById("output").innerText = cruiser_text["roll_succeeded"]
-  } else {
-    document.getElementById("output").innerText = cruiser_text["roll_failed"]
+  if ( cruiser_unlocked == false ) {
+    if ( Math.random() < cruiser_percentages[round_number] ) {
+      document.getElementById("output").innerText = cruiser_text["roll_succeeded"]
+      cruiser_unlocked = true
+    } else {
+      document.getElementById("output").innerText = cruiser_text["roll_failed"]
+    }
   }
 }
 
