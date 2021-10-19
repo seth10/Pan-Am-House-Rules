@@ -1,17 +1,35 @@
 <script>
 
-cruiser_text = {
-  roll_failed: "The cruiser remains locked.",
-  roll_succeeded: "The cruiser is unlocked!"
-}
-
-cruiser_percentages = {
-  1: 0.15,
-  2: 0.5,
-  3: 1
-}
-
 cruiser_unlocked = false
+
+cruiser_status_text = {
+  false: "The cruiser remains locked.",
+  true: "The cruiser is unlocked!"
+}
+
+cruiser_unlock_percentages = {
+  1: 0.15,
+  2: 0.45,
+  3: 1.00
+}
+
+
+jet_unlocked = false
+
+jet_status_text = {
+  false: "The jet remains locked.",
+  true: "The jet is unlocked!"
+}
+
+jet_unlock_percentages = {
+  1: 0.05,
+  2: 0.10,
+  3: 0.20,
+  4: 0.40,
+  5: 0.65,
+  6: 1.00
+}
+
 
 round_number = 0
 
@@ -20,14 +38,18 @@ function start_round() {
   round_number = round_number + 1
   document.getElementById("round").innerText = "Round " + round_number
   
-  if ( cruiser_unlocked == false ) {
-    if ( Math.random() < cruiser_percentages[round_number] ) {
-      document.getElementById("output").innerText = cruiser_text["roll_succeeded"]
-      cruiser_unlocked = true
-    } else {
-      document.getElementById("output").innerText = cruiser_text["roll_failed"]
-    }
+  // First roll for jet. If the jet unlocks, we also unlock the cruiser.
+  if ( Math.random() < jet_unlock_percentages[round_number] ) {
+    jet_unlocked = true
+    cruiser_unlocked = true
   }
+  
+  if ( Math.random() < cruiser_unlock_percentages[round_number] ) {
+    cruiser_unlocked = true
+  }
+  
+  // Update the output with the current status, use \n for a new line between items.
+  document.getElementById("output").innerText = cruiser_status_text[cruiser_unlocked] + "\n" + jet_status_text[jet_unlocked]
 }
 
 </script>
@@ -38,4 +60,4 @@ function start_round() {
 
 <h1 id="round">The game has not yet begun.</h1>
 
-<p id="output">Updates will appear here.</p>
+<p id="output">Status will appear here.</p>
