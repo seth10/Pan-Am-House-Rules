@@ -35,6 +35,11 @@ round_number = 0
 
 
 function start_round() {
+  // If we're already on round 7, stop here and don't do anything. The game is over.
+  if (round_number == 7) {
+    return
+  }
+  
   round_number = round_number + 1
   document.getElementById("round").innerText = "Round " + round_number
   
@@ -48,8 +53,14 @@ function start_round() {
     cruiser_unlocked = true
   }
   
+  if ( Math.random() < 0.50 ) {
+    stock_text = "Stock: up"
+  } else {
+    stock_text = "Stock: down"
+  }
+  
   // Update the output with the current status, use \n for a new line between items.
-  document.getElementById("output").innerText = cruiser_status_text[cruiser_unlocked] + "\n" + jet_status_text[jet_unlocked]
+  document.getElementById("output").innerText = cruiser_status_text[cruiser_unlocked] + "\n" + jet_status_text[jet_unlocked] + "\n" + stock_text
 }
 
 </script>
