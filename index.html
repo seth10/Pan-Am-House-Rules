@@ -31,6 +31,13 @@ jet_unlock_percentages = {
 }
 
 
+stock_status = "No change"
+
+stock_direction = ["up", "down"]
+
+stock_severity = ["once", "once", "once", "once", "twice"]
+
+
 current_bonus = "No bonus"
 
 bonus_text = {
@@ -78,18 +85,13 @@ function start_round() {
     cruiser_unlocked = true
   }
   
-  // Die roll: Stock
-  if ( Math.random() < 0.50 ) {
-    stock_text = "Stock: up"
-  } else {
-    stock_text = "Stock: down"
-  }
+  stock_status = "The stock went " + stock_direction.sample() + " " + stock_severity.sample()
   
   // Die roll: Bonus
   current_bonus = bonus_text[round_number].sample()
   
   // Update the output with the current status, use \n for a new line between items.
-  document.getElementById("output").innerText = cruiser_status_text[cruiser_unlocked] + "\n" + jet_status_text[jet_unlocked] + "\n" + stock_text + "\n" + current_bonus
+  document.getElementById("output").innerText = cruiser_status_text[cruiser_unlocked] + "\n" + jet_status_text[jet_unlocked] + "\n" + stock_status + "\n" + current_bonus
 }
 
 </script>
