@@ -8,9 +8,9 @@ cruiser_status_text = {
 }
 
 cruiser_unlock_percentages = {
-  1: 0.075,
-  2: 0.35,
-  3: 1.00
+  1: 7.5,
+  2: 35,
+  3: 100
 }
 
 
@@ -22,12 +22,12 @@ jet_status_text = {
 }
 
 jet_unlock_percentages = {
-  1: 0.05,
-  2: 0.08,
-  3: 0.10,
-  4: 0.20,
-  5: 0.30,
-  6: 1.00
+  1: 5,
+  2: 8,
+  3: 10,
+  4: 20,
+  5: 30,
+  6: 100
 }
 
 
@@ -44,12 +44,12 @@ function start_round() {
   document.getElementById("round").innerText = "Round " + round_number
   
   // First roll for jet. If the jet unlocks, we also unlock the cruiser.
-  if ( Math.random() < jet_unlock_percentages[round_number] ) {
+  if ( Math.random()*100 < jet_unlock_percentages[round_number] ) {
     jet_unlocked = true
     cruiser_unlocked = true
   }
   
-  if ( Math.random() < cruiser_unlock_percentages[round_number] ) {
+  if ( Math.random()*100 < cruiser_unlock_percentages[round_number] ) {
     cruiser_unlocked = true
   }
   
