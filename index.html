@@ -32,10 +32,8 @@ jet_unlock_percentages = {
 
 
 stock_status = "No change"
-
-stock_direction = ["up", "down"]
-
-stock_severity = ["once", "once", "once", "once", "twice"]
+stock_up_chance = 65
+stock_double_chance = 10
 
 
 current_bonus = "No bonus"
@@ -85,7 +83,19 @@ function start_round() {
     cruiser_unlocked = true
   }
   
-  stock_status = "The stock went " + stock_direction.sample() + " " + stock_severity.sample()
+  stock_status = "The stock went "
+  
+  if ( Math.random()*100 < stock_up_chance ) {
+    stock_status = stock_status + "up "
+  } else {
+    stock_status = stock_status + "down "
+  }
+  
+  if ( Math.random()*100 < stock_double_chance ) {
+    stock_status = stock_status + "twice."
+  } else {
+    stock_status = stock_status + "once."
+  }
   
   // Die roll: Bonus
   current_bonus = bonus_text[round_number].sample()
