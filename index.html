@@ -31,7 +31,30 @@ jet_unlock_percentages = {
 }
 
 
+current_bonus = "No bonus"
+
+bonus_text = {
+  1: ["A",
+      "B",
+      "C"],
+  2: ["D",
+      "E",
+      "F"],
+  3: [],
+  4: [],
+  5: [],
+  6: [],
+  7: []
+}
+
+
 round_number = 0
+
+
+// Adding a .sample() function to arrays to pick a random item (https://stackoverflow.com/a/33906108/5279083)
+Array.prototype.sample = function(){
+  return this[Math.floor(Math.random()*this.length)];
+}
 
 
 function start_round() {
@@ -59,8 +82,10 @@ function start_round() {
     stock_text = "Stock: down"
   }
   
+  current_bonus = bonus_text[round_number].sample()
+  
   // Update the output with the current status, use \n for a new line between items.
-  document.getElementById("output").innerText = cruiser_status_text[cruiser_unlocked] + "\n" + jet_status_text[jet_unlocked] + "\n" + stock_text
+  document.getElementById("output").innerText = cruiser_status_text[cruiser_unlocked] + "\n" + jet_status_text[jet_unlocked] + "\n" + stock_text + "\n" + current_bonus
 }
 
 </script>
