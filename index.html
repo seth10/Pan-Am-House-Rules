@@ -66,22 +66,26 @@ function start_round() {
   round_number = round_number + 1
   document.getElementById("round").innerText = "Round " + round_number
   
-  // First roll for jet. If the jet unlocks, we also unlock the cruiser.
+  // Die roll: Jet. We'll roll for the jet first so if the jet unlocks, we also unlock the cruiser.
+  // Math.random, here's the documentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   if ( Math.random()*100 < jet_unlock_percentages[round_number] ) {
     jet_unlocked = true
     cruiser_unlocked = true
   }
   
+  // Die roll: Cruiser
   if ( Math.random()*100 < cruiser_unlock_percentages[round_number] ) {
     cruiser_unlocked = true
   }
   
+  // Die roll: Stock
   if ( Math.random() < 0.50 ) {
     stock_text = "Stock: up"
   } else {
     stock_text = "Stock: down"
   }
   
+  // Die roll: Bonus
   current_bonus = bonus_text[round_number].sample()
   
   // Update the output with the current status, use \n for a new line between items.
